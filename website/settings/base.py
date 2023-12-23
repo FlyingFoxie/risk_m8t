@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # django apps #
-    "threat_modeling"
+    "risk",
     # third party apps #
     "rest_framework",
     "rest_framework.authtoken",
@@ -146,8 +146,8 @@ REST_FRAMEWORK = {
 # By Default swagger ui is available only to admin user(s). You can change permission classes to change that
 # See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
 SPECTACULAR_SETTINGS = {
-    "TITLE": "KAMI Airlines API",
-    "DESCRIPTION": "Documentation of API endpoints of KAMI Airlines",
+    "TITLE": "Threat Modeling App API",
+    "DESCRIPTION": "Documentation of API endpoints of Threat Modeling App",
     "VERSION": "0.1.0",
     "SERVE_PERMISSIONS": [],
     "SERVERS": [

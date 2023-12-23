@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.views.generic import RedirectView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
@@ -12,7 +12,7 @@ urlpatterns = [
 # API URLS
 urlpatterns += [
     # API base url
-    # path("api/", include("airlines.urls")),
+    path("risk/", include("risk.urls")),
     # DRF auth token
     path("auth-token/", obtain_auth_token),
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),

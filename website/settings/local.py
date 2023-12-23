@@ -17,4 +17,7 @@ STORAGES = {
     "default": {
         "BACKEND": "website.storages.MediaRootS3Boto3Storage",
     },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
 }
