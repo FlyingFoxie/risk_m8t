@@ -17,3 +17,14 @@ class ProjectHtmxView(LoginRequiredMixin, DetailView, UpdateView):
     )
     fields = ["status"]
     model = Risk
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["mitigated_risks"] = self.get_object().risk.filter(
+            status="fully_mitigated"
+        )
+        context["not_mitigated_risks"] = self.get_object().risk.exclude(
+            status="fully_mitigated"
+        )
+
+        return context

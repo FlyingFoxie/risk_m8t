@@ -11,54 +11,138 @@
 <div class="modal-body">
   <div class="row">
     <div class="col mb-3">
-      <table id="risk_detail_datatable" class="table table-striped" style="width:100%">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Mitigation Strategy</th>
-            <th>Severity</th>
-            <th>Likelihood Of Attack</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for risk_object in object.risk.all %}
-          <tr>
-            <td>
-              {{ risk_object.scenario.name }}
-              <i class="bx bx-info-circle bx-sm me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ risk_object.scenario.description }}"></i>
-            </td>
-            <td>{{ risk_object.scenario.mitigation_strategy }}</td>
-            <td>
-              <span class="badge rounded-pill
-              {% if risk_object.scenario.severity == 'high' %}bg-danger
-              {% elif risk_object.scenario.severity == 'medium' %}bg-warning
-              {% elif risk_object.scenario.severity == 'low' %}bg-info
-              {% endif %}">{{ risk_object.scenario.severity }}</span>
-            </td>
-            <td>
-              <span class="badge rounded-pill
-              {% if risk_object.scenario.likelihood_of_attack == 'high' %}bg-danger
-              {% elif risk_object.scenario.likelihood_of_attack == 'medium' %}bg-warning
-              {% elif risk_object.scenario.likelihood_of_attack == 'low' %}bg-info
-              {% endif %}">{{ risk_object.scenario.likelihood_of_attack }}</span>
-            </td>
-            <td>
-              {{ risk_object.get_status_display }}
-              {% if perms.risk.change_risk %}
-              <form method="post" action="{% url 'risk:risk_htmx' risk_object.id %}">
-                {% csrf_token %}
-                {% for field in form %}
-                {{ field|add_css:'form-select mb-3' }}
-                {% endfor %}
-                <button type="submit" value="Update" class="btn btn-primary">Update</button>
-              </form>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <ul class="nav nav-pills mb-3" role="tablist">
+        <li class="nav-item">
+          <button
+            type="button"
+            class="nav-link active"
+            role="tab"
+            data-bs-toggle="tab"
+            data-bs-target="#navs-not-mitigated-risks"
+            aria-controls="navs-not-mitigated-risks"
+            aria-selected="true">
+            Not Mitigated Risks
+            {% if not_mitigated_risks|length > 0 %}
+            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1">{{ not_mitigated_risks|length }}</span>
+            {% endif %}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            type="button"
+            class="nav-link"
+            role="tab"
+            data-bs-toggle="tab"
+            data-bs-target="#navs-mitigated-risks"
+            aria-controls="navs-mitigated-risks"
+            aria-selected="false">
+            Mitigated Risks
+            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-info ms-1">{{ mitigated_risks|length }}</span>
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="navs-not-mitigated-risks" role="tabpanel">
+          <table id="risk_detail_datatable" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Mitigation Strategy</th>
+                <th>Severity</th>
+                <th>Likelihood Of Attack</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for risk_object in not_mitigated_risks %}
+              <tr>
+                <td>
+                  {{ risk_object.scenario.name }}
+                  <i class="bx bx-info-circle bx-sm me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ risk_object.scenario.description }}"></i>
+                </td>
+                <td>{{ risk_object.scenario.mitigation_strategy }}</td>
+                <td>
+                  <span class="badge rounded-pill
+                  {% if risk_object.scenario.severity == 'high' %}bg-danger
+                  {% elif risk_object.scenario.severity == 'medium' %}bg-warning
+                  {% elif risk_object.scenario.severity == 'low' %}bg-info
+                  {% endif %}">{{ risk_object.scenario.severity }}</span>
+                </td>
+                <td>
+                  <span class="badge rounded-pill
+                  {% if risk_object.scenario.likelihood_of_attack == 'high' %}bg-danger
+                  {% elif risk_object.scenario.likelihood_of_attack == 'medium' %}bg-warning
+                  {% elif risk_object.scenario.likelihood_of_attack == 'low' %}bg-info
+                  {% endif %}">{{ risk_object.scenario.likelihood_of_attack }}</span>
+                </td>
+                <td>
+                  {{ risk_object.get_status_display }}
+                  {% if perms.risk.change_risk %}
+                  <form method="post" action="{% url 'risk:risk_htmx' risk_object.id %}">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field|add_css:'form-select mb-3' }}
+                    {% endfor %}
+                    <button type="submit" value="Update" class="btn btn-primary">Update</button>
+                  </form>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="navs-mitigated-risks" role="tabpanel">
+          <table id="mitigated_risk_detail_datatable" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Mitigation Strategy</th>
+                <th>Severity</th>
+                <th>Likelihood Of Attack</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for risk_object in mitigated_risks %}
+              <tr>
+                <td>
+                  {{ risk_object.scenario.name }}
+                  <i class="bx bx-info-circle bx-sm me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ risk_object.scenario.description }}"></i>
+                </td>
+                <td>{{ risk_object.scenario.mitigation_strategy }}</td>
+                <td>
+                  <span class="badge rounded-pill
+                  {% if risk_object.scenario.severity == 'high' %}bg-danger
+                  {% elif risk_object.scenario.severity == 'medium' %}bg-warning
+                  {% elif risk_object.scenario.severity == 'low' %}bg-info
+                  {% endif %}">{{ risk_object.scenario.severity }}</span>
+                </td>
+                <td>
+                  <span class="badge rounded-pill
+                  {% if risk_object.scenario.likelihood_of_attack == 'high' %}bg-danger
+                  {% elif risk_object.scenario.likelihood_of_attack == 'medium' %}bg-warning
+                  {% elif risk_object.scenario.likelihood_of_attack == 'low' %}bg-info
+                  {% endif %}">{{ risk_object.scenario.likelihood_of_attack }}</span>
+                </td>
+                <td>
+                  {{ risk_object.get_status_display }}
+                  {% if perms.risk.change_risk %}
+                  <form method="post" action="{% url 'risk:risk_htmx' risk_object.id %}">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field|add_css:'form-select mb-3' }}
+                    {% endfor %}
+                    <button type="submit" value="Update" class="btn btn-primary">Update</button>
+                  </form>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -66,6 +150,7 @@
 <script>
     $(document).ready(function() {
       new DataTable('#risk_detail_datatable');
+      new DataTable('#mitigated_risk_detail_datatable');
       const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
       const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     })
