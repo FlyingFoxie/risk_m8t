@@ -1,0 +1,40 @@
+<table id="risk_scenario_datatable" class="table table-striped" style="width:100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Unresolved High Severity Risk</th>
+      <th>Unresolved Risks</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr
+      class="clickable-row"
+      style="cursor: pointer;"
+      data-bs-toggle="modal"
+      data-bs-target="#riskDetailModal"
+      hx-target="#modalContent"
+      hx-get="{% url 'risk:project_htmx' object.id %}?"
+    >
+      <td>{{ object.name }}</td>
+      <td><i class="bx bx-user-circle bx-sm me-3"></i>{{ object.owner.username }}</td>
+      <td>
+        {% if object.unresolved_high_severity > 0 %}
+        <span class="badge rounded-pill bg-danger">{{ object.unresolved_high_severity }}</span>
+        {% else %}
+        <span class="badge rounded-pill bg-success">{{ object.unresolved_high_severity }}</span>
+        {% endif %}
+      </td>
+      <td>{{ object.unresolved_risk }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="riskDetailModal" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>

@@ -3,9 +3,9 @@ from django.db import models
 
 class Risk(models.Model):
     STATUS_CHOICES = (
-        ("not_mitigated,", "NOT MITIGATED"),
-        ("partially_mitigated,", "PARTIALLY MITIGATED"),
-        ("fully_mitigated.", "FULLY MITIGATED"),
+        ("not_mitigated", "NOT MITIGATED"),
+        ("partially_mitigated", "PARTIALLY MITIGATED"),
+        ("fully_mitigated", "FULLY MITIGATED"),
     )
 
     scenario = models.ForeignKey("risk.RiskScenario", on_delete=models.CASCADE)

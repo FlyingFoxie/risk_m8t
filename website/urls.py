@@ -1,24 +1,15 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", RedirectView.as_view(pattern_name="api-docs")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("", RedirectView.as_view(pattern_name="risk:dashboard")),
+    # risk app
+    path("risk/", include("risk.urls")),
 ]
 
-# API URLS
-urlpatterns += [
-    # API base url
-    path("risk/", include("risk.urls")),
-    # DRF auth token
-    path("auth-token/", obtain_auth_token),
-    path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
-    path(
-        "api/docs/",
-        SpectacularSwaggerView.as_view(url_name="api-schema"),
-        name="api-docs",
-    ),
-]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

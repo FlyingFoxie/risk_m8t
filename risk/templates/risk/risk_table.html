@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Content wrapper -->
+<div
+  class="content-wrapper"
+  hx-get="{% url 'risk:risk_table_htmx' %}"
+  hx-target="#dashboard-content"
+  hx-trigger="load"
+  hx-indicator="#htmx-indicator"
+>
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <!-- Breadcrumbs -->
+    <h4 class="py-3 mb-4">Risk Table</h4>
+    <!-- / Breadcrumbs -->
+    <div id="htmx-indicator" class="htmx-indicator">
+      {% include 'loading_card.html' %}
+    </div>
+    <div id="dashboard-content"></div>
+  </div>
+  <!-- / Content -->
+</div>
+{% endblock %}

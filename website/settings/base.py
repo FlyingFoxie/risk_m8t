@@ -53,10 +53,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # django apps #
     "risk",
-    # third party apps #
-    "rest_framework",
-    "rest_framework.authtoken",
-    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +70,7 @@ ROOT_URLCONF = "website.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR) + "/templates/"],
+        "DIRS": [str(APP_DIR) + "/templates/"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,32 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = (os.path.join(APP_DIR, "static"),)
+STATIC_ROOT = str(APP_DIR / "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# django-rest-framework
-# -------------------------------------------------------------------------------
-# django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-
-# By Default swagger ui is available only to admin user(s). You can change permission classes to change that
-# See more configuration options at https://drf-spectacular.readthedocs.io/en/latest/settings.html#settings
-SPECTACULAR_SETTINGS = {
-    "TITLE": "Threat Modeling App API",
-    "DESCRIPTION": "Documentation of API endpoints of Threat Modeling App",
-    "VERSION": "0.1.0",
-    "SERVE_PERMISSIONS": [],
-    "SERVERS": [
-        {"url": "http://127.0.0.1:8000", "description": "Local Development server"}
-    ],
-}
+LOGOUT_REDIRECT_URL = "/"

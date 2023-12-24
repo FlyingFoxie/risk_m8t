@@ -1,0 +1,42 @@
+<table id="risk_scenario_datatable" class="table table-striped" style="width:100%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Mitigation Strategy</th>
+      <th>Severity</th>
+      <th>Likelihood of attack</th>
+      <th>Target</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <td>{{ object.name }}</td>
+      <td>{{ object.description }}</td>
+      <td>{{ object.mitigation_strategy }}</td>
+      <td>
+        <span class="badge rounded-pill
+        {% if object.severity == 'high' %}bg-danger
+        {% elif object.severity == 'medium' %}bg-warning
+        {% elif object.severity == 'low' %}bg-info
+        {% endif %}">{{ object.severity }}</span>
+      </td>
+      <td>
+        <span class="badge rounded-pill
+        {% if object.likelihood_of_attack == 'high' %}bg-danger
+        {% elif object.likelihood_of_attack == 'medium' %}bg-warning
+        {% elif object.likelihood_of_attack == 'low' %}bg-info
+        {% endif %}">{{ object.likelihood_of_attack }}</span>
+      </td>
+      <td>{{ object.target }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+      new DataTable('#risk_scenario_datatable');
+    })
+</script>
