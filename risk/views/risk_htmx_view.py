@@ -9,3 +9,9 @@ class RiskHtmxView(LoginRequiredMixin, UpdateView):
     fields = ["status"]
     model = Risk
     success_url = reverse_lazy("risk:risk_table")
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.has_perm("risk.change_risk"):
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()

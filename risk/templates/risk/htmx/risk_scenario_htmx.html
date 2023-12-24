@@ -1,3 +1,5 @@
+{% load template_tag %}
+
 <table id="risk_scenario_datatable" class="table table-striped" style="width:100%">
   <thead>
     <tr>
@@ -6,7 +8,9 @@
       <th>Mitigation Strategy</th>
       <th>Severity</th>
       <th>Likelihood of attack</th>
-      <th>Target</th>
+      {% if perms.risk.change_risk %}
+      <th>Action</th>
+      {% endif %}
     </tr>
   </thead>
   <tbody>
@@ -29,7 +33,18 @@
         {% elif object.likelihood_of_attack == 'low' %}bg-info
         {% endif %}">{{ object.likelihood_of_attack }}</span>
       </td>
-      <td>{{ object.target }}</td>
+      {% if perms.risk.change_risk %}
+      <td>
+        <form method="post" action="{% url 'risk:risk_scenario_htmx'%}">
+          {% csrf_token %}
+          {% for field in form %}
+          {{ field|add_css:'form-select mb-3' }}
+          {% endfor %}
+          <input type="hidden" id="id_scenario" name="scenario" value="{{ object.id }}">
+          <button type="submit" class="btn btn-primary">Add to project</button>
+        </form>
+      </td>
+      {% endif %}
     </tr>
     {% endfor %}
   </tbody>
