@@ -10,7 +10,7 @@
    1. [Running Test and Coverage Report](#running-test-and-coverage-report)
    2. [Existing Coverage Report in this REPO](#existing-coverage-report-in-this-repo)
 2. [Getting Up and Running Locally With Docker](#getting-up-and-running-locally-with-docker)
-
+3. [Basic Setup of Group](#basic-setup-of-group)
 ---
 
 ## Getting Up and Running Locally
@@ -150,3 +150,17 @@ $ docker exec -it risk_m8t_django /bin/bash
 Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the login page.
 
 ![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-12-26+at+12.17.06%E2%80%AFAM.png)
+
+---
+
+## Basic Setup of Group
+
+### Risk Consultant
+Permissions
+- risk:view_project
+- risk:view_risk
+
+### Project Manager
+Permissions
+- risk:change_risk
+- risk:view_risk
