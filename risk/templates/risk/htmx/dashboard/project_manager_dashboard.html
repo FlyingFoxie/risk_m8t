@@ -1,1 +1,32 @@
-PM dashboard
+<div class="row">
+  <div class="col-lg-4 col-md-4 order-1">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <i class="menu-icon tf-icons bx bxs-hot text-danger"></i>
+              </div>
+            </div>
+            <span class="fw-medium d-block mb-1">High Severity Risk</span>
+            <h3 class="card-title mb-2">{{ total_unresolved_high_severity_risk }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <i class="menu-icon tf-icons bx bxs-error"></i>
+              </div>
+            </div>
+            <span class="fw-medium d-block mb-1">Unresolved Risk</span>
+            <h3 class="card-title mb-2">{{ total_unresolved_risk }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

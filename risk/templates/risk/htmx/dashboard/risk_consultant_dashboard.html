@@ -1,1 +1,87 @@
-RC Dashboard
+<div class="row">
+  <div class="col-lg-4 col-md-4 order-1">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <i class="menu-icon tf-icons bx bxs-hot text-danger"></i>
+              </div>
+            </div>
+            <span class="fw-medium d-block mb-1">High Severity Risk</span>
+            <h3 class="card-title mb-2">{{ total_unresolved_high_severity_risk }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12 col-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title d-flex align-items-start justify-content-between">
+              <div class="avatar flex-shrink-0">
+                <i class="menu-icon tf-icons bx bxs-error"></i>
+              </div>
+            </div>
+            <span class="fw-medium d-block mb-1">Unresolved Risk</span>
+            <h3 class="card-title mb-2">{{ total_unresolved_risk }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+    <div class="card h-100"  style="overflow-y: auto;">
+      <div class="card-header d-flex align-items-center justify-content-between pb-0">
+        <div class="card-title mb-0">
+          <h5 class="m-0 me-2">Risk Scenario Statistics</h5>
+        </div>
+      </div>
+      <div class="card-body" >
+        {{ risk_scenario_pie_chart|safe }}
+        <ul class="p-0 m-0">
+          {% for label, value in risk_scenario_counts.items %}
+          <li class="d-flex mb-4 pb-1">
+            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+              <div class="me-2">
+                <h6 class="mb-0">{{ label }}</h6>
+              </div>
+              <div class="user-progress">
+                <small class="fw-medium">{{ value }}</small>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+    <div class="card h-100" style="overflow-y: auto;">
+      <div class="card-header d-flex align-items-center justify-content-between pb-0">
+        <div class="card-title mb-0">
+          <h5 class="m-0 me-2">Top Project Risk</h5>
+        </div>
+      </div>
+      <div class="card-body" style="height: 100%; overflow-y: auto;">
+        {{ top_project_risk_bar_chart|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
+    <div class="card h-100" style="overflow-y: auto;">
+      <div class="card-header d-flex align-items-center justify-content-between pb-0">
+        <div class="card-title mb-0">
+          <h5 class="m-0 me-2">Risk Scenario Heatmap</h5>
+        </div>
+      </div>
+      <div class="card-body" style="height: 100%; overflow-y: auto;">
+        {{ risk_heat_map|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+</div>

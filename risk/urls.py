@@ -30,4 +30,5 @@ urlpatterns = [
     path("risk_table_htmx", views.RiskTableHtmxView.as_view(), name="risk_table_htmx"),
     path("project_htmx/<int:pk>", views.ProjectHtmxView.as_view(), name="project_htmx"),
     path("risk_htmx/<int:pk>", views.RiskHtmxView.as_view(), name="risk_htmx"),
+    path("risk_delete/<int:pk>", views.RiskDeleteView.as_view(), name="risk_delete"),
 ]

@@ -83,7 +83,11 @@
                     {% for field in form %}
                     {{ field|add_css:'form-select mb-3' }}
                     {% endfor %}
-                    <button type="submit" value="Update" class="btn btn-primary">Update</button>
+                    <button type="submit" value="Update" class="btn btn-primary mb-3">Update</button>
+                  </form>
+                  <form method="post" action="{% url 'risk:risk_delete' risk_object.id %}">
+                    {% csrf_token %}
+                    <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
                   </form>
                   {% endif %}
                 </td>
@@ -133,7 +137,11 @@
                     {% for field in form %}
                     {{ field|add_css:'form-select mb-3' }}
                     {% endfor %}
-                    <button type="submit" value="Update" class="btn btn-primary">Update</button>
+                    <button type="submit" value="Update" class="btn btn-primary mb-3">Update</button>
+                  </form>
+                  <form method="post" action="{% url 'risk:risk_delete' risk_object.id %}">
+                    {% csrf_token %}
+                    <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
                   </form>
                   {% endif %}
                 </td>

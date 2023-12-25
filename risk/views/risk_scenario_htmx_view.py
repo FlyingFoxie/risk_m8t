@@ -30,11 +30,17 @@ class RiskScenarioHtmxView(LoginRequiredMixin, ListView, FormView):
             messages.error(
                 self.request,
                 f"{risk_scenario_object.name} already exists for {form.cleaned_data['project']}",
+                extra_tags="danger",
             )
             return HttpResponseRedirect(self.get_success_url())
 
         new_risk = form.save(commit=False)
         new_risk.scenario = risk_scenario_object
+        new_risk.status = "not_mitigated"
         new_risk.save()
+        messages.info(
+            self.request,
+            f"{risk_scenario_object.name} created successfully for {form.cleaned_data['project']}",
+        )
 
         return HttpResponseRedirect(self.get_success_url())
