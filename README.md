@@ -51,8 +51,7 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the swagger
-api docs page.
+Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the login page.
 
 ![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-12-26+at+12.17.06%E2%80%AFAM.png)
 
@@ -148,7 +147,6 @@ $ docker-compose up -d --build
 $ docker exec -it risk_m8t_django /bin/bash
 ```
 
-Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the swagger
-api docs page.
+Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the login page.
 
 ![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-12-26+at+12.17.06%E2%80%AFAM.png)
