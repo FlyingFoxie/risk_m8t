@@ -8,33 +8,22 @@ from risk.models import Project
 
 
 class DashboardHtmxView(LoginRequiredMixin, TemplateView):
-    user_role = None
-    templates_role = {
-        "Project Manager": "risk/htmx/dashboard/project_manager_dashboard.html",
-        "Risk Consultant": "risk/htmx/dashboard/risk_consultant_dashboard.html",
-    }
-
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
-        if self.request.user.groups.filter(name="Project Manager").exists():
-            self.user_role = "Project Manager"
-        elif self.request.user.groups.filter(name="Risk Consultant").exists():
-            self.user_role = "Risk Consultant"
-
-    def get_template_names(self):
-        return [self.templates_role[self.user_role]]
+    template_name = "risk/htmx/dashboard/no_permission_dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.user_role == "Project Manager":
+        # Project Manager Role
+        if self.request.user.has_perm("risk.change_risk") and self.request.user.has_perm("risk.view_risk"):
+            self.template_name = "risk/htmx/dashboard/project_manager_dashboard.html"
             project_objects = (
                 Project.objects.get_summary()
                 .filter(owner=self.request.user)
                 .prefetch_related("risk")
                 .prefetch_related("risk__scenario")
             )
-
-        elif self.user_role == "Risk Consultant":
+        # Risk Consultant Role
+        elif self.request.user.has_perm("risk.view_risk"):
+            self.template_name = "risk/htmx/dashboard/risk_consultant_dashboard.html"
             project_objects = (
                 Project.objects.get_summary()
                 .prefetch_related("risk")
@@ -96,6 +85,9 @@ class DashboardHtmxView(LoginRequiredMixin, TemplateView):
             context["top_project_risk_bar_chart"] = fig_hor.to_html()
             context["risk_heat_map"] = fig_heatmap.to_html()
             context["risk_scenario_counts"] = dict(risk_scenario_counts)
+
+        else:
+            return context
 
         context["total_unresolved_high_severity_risk"] = sum(
             project.unresolved_high_severity for project in project_objects
