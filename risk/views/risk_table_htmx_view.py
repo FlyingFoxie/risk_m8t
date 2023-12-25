@@ -5,6 +5,15 @@ from risk.models import Project
 
 
 class RiskTableHtmxView(LoginRequiredMixin, ListView):
+    """
+    View for displaying a table of Project summaries
+
+    Permission "risk.view_project"
+        - View all projects
+    w/o Permission "risk.view_project"
+        - View only projects owned by user
+    """
+
     template_name = "risk/htmx/risk_table_htmx.html"
     queryset = Project.objects.get_summary()
 

@@ -6,6 +6,13 @@ from risk.models import Risk
 
 
 class RiskHtmxView(LoginRequiredMixin, UpdateView):
+    """
+    View to update Risk
+
+    Permission "risk.change_risk"
+        - POST to update Risk
+    """
+
     fields = ["status"]
     model = Risk
     success_url = reverse_lazy("risk:risk_table")

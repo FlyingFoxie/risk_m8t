@@ -8,12 +8,23 @@ from risk.models import Project
 
 
 class DashboardHtmxView(LoginRequiredMixin, TemplateView):
+    """
+    View for displaying Dashboard
+
+    Permission "risk.change_risk" and "risk.view_risk"
+        - View Project Manager dashboard
+    Permission "risk.view_risk
+        - View Risk Consultant dashboard
+    """
+
     template_name = "risk/htmx/dashboard/no_permission_dashboard.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Project Manager Role
-        if self.request.user.has_perm("risk.change_risk") and self.request.user.has_perm("risk.view_risk"):
+        if self.request.user.has_perm(
+            "risk.change_risk"
+        ) and self.request.user.has_perm("risk.view_risk"):
             self.template_name = "risk/htmx/dashboard/project_manager_dashboard.html"
             project_objects = (
                 Project.objects.get_summary()

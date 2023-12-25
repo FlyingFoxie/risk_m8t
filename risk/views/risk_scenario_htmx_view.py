@@ -10,6 +10,13 @@ from risk.models import Risk, RiskScenario
 
 
 class RiskScenarioHtmxView(LoginRequiredMixin, ListView, FormView):
+    """
+    View for displaying a table of Risk Scenario and handle creation of Risk.
+
+    Permission "risk.change_risk"
+        - POST to create new risk
+    """
+
     template_name = "risk/htmx/risk_scenario_htmx.html"
     model = RiskScenario
     form_class = RiskForm
@@ -19,6 +26,12 @@ class RiskScenarioHtmxView(LoginRequiredMixin, ListView, FormView):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
         return kwargs
+
+    def post(self, request, *args, **kwargs):
+        if self.request.user.has_perm("risk.change_risk"):
+            return super().post(request, *args, **kwargs)
+        else:
+            return self.handle_no_permission()
 
     def form_valid(self, form):
         risk_scenario_object = get_object_or_404(

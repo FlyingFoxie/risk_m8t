@@ -6,6 +6,13 @@ from risk.models import Risk
 
 
 class RiskDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    View to delete Risk
+
+    Permission "risk.change_risk"
+        - POST to delete Risk
+    """
+
     model = Risk
     success_url = reverse_lazy("risk:risk_table")
 
