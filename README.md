@@ -54,7 +54,7 @@ $ python manage.py runserver
 Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the swagger
 api docs page.
 
-![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-11-30+at+8.12.54%E2%80%AFAM.png)
+![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-12-26+at+12.17.06%E2%80%AFAM.png)
 
 ### Running Test and Coverage Report
 
@@ -143,7 +143,12 @@ You'll need to configure 2 env_file `.django` and `.postgres` in folder .envs/ .
 $ docker-compose up -d --build
 ```
 
+3. Go into the bash shell of Django container
+```bash
+$ docker exec -it risk_m8t_django /bin/bash
+```
+
 Now that the server's running, visit http://127.0.0.1:8000/ with your web browser. You'll be redirected to the swagger
 api docs page.
 
-![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-11-30+at+8.12.54%E2%80%AFAM.png)
+![API Docs](https://mybucketla.s3.ap-southeast-1.amazonaws.com/Screenshot+2023-12-26+at+12.17.06%E2%80%AFAM.png)
