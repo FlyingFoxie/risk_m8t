@@ -77,33 +77,44 @@ $ coverage report
 
 ### Existing Coverage Report in this REPO
 ```
-Name                                            Stmts   Miss  Cover
--------------------------------------------------------------------
-airlines/__init__.py                                0      0   100%
-airlines/admin.py                                   3      0   100%
-airlines/apps.py                                    4      0   100%
-airlines/migrations/0001_initial.py                 5      0   100%
-airlines/migrations/__init__.py                     0      0   100%
-airlines/models/__init__.py                         1      0   100%
-airlines/models/abstracts/time_stamp_model.py       6      0   100%
-airlines/models/airplane.py                        12      1    92%
-airlines/models/airplane_manager.py                11      0   100%
-airlines/serializers/__init__.py                    1      0   100%
-airlines/serializers/airplane_serializer.py        18      0   100%
-airlines/tests/__init__.py                          0      0   100%
-airlines/tests/conftest.py                          8      0   100%
-airlines/tests/factories.py                        13      0   100%
-airlines/tests/test_drf_views.py                   45      0   100%
-airlines/tests/test_models.py                      13      0   100%
-airlines/urls.py                                    4      0   100%
-airlines/views/__init__.py                          1      0   100%
-airlines/views/airplane_viewset.py                 35      0   100%
-kami_airlines/__init__.py                           0      0   100%
-kami_airlines/settings/base.py                     22      0   100%
-kami_airlines/settings/test.py                      1      0   100%
-kami_airlines/urls.py                               7      0   100%
--------------------------------------------------------------------
-TOTAL                                             210      1    99%
+Name                                                                           Stmts   Miss  Cover
+--------------------------------------------------------------------------------------------------
+risk/__init__.py                                                                   0      0   100%
+risk/admin.py                                                                      5      0   100%
+risk/apps.py                                                                       4      0   100%
+risk/forms/__init__.py                                                             1      0   100%
+risk/forms/risk_form.py                                                           10      0   100%
+risk/migrations/0001_initial.py                                                    7      0   100%
+risk/migrations/0002_risk_created_datetime_risk_updated_datetime_and_more.py       5      0   100%
+risk/migrations/__init__.py                                                        0      0   100%
+risk/models/__init__.py                                                            4      0   100%
+risk/models/project.py                                                             9      1    89%
+risk/models/project_manager.py                                                     9      0   100%
+risk/models/risk.py                                                               10      1    90%
+risk/models/risk_scenario.py                                                      16      1    94%
+risk/templatetags/template_tag.py                                                  5      1    80%
+risk/tests/__init__.py                                                             0      0   100%
+risk/tests/conftest.py                                                            28      0   100%
+risk/tests/factories.py                                                           37      0   100%
+risk/tests/test_forms.py                                                           5      0   100%
+risk/tests/test_models.py                                                         13      0   100%
+risk/tests/test_urls.py                                                           29      0   100%
+risk/tests/test_views.py                                                          17      0   100%
+risk/urls.py                                                                       4      0   100%
+risk/views/__init__.py                                                             7      0   100%
+risk/views/dashboard_htmx_view.py                                                 38      0   100%
+risk/views/login_required_template_view.py                                         4      0   100%
+risk/views/project_htmx_view.py                                                   13      4    69%
+risk/views/risk_delete_view.py                                                    11      3    73%
+risk/views/risk_htmx_view.py                                                      12      3    75%
+risk/views/risk_scenario_htmx_view.py                                             28     13    54%
+risk/views/risk_table_htmx_view.py                                                10      3    70%
+website/__init__.py                                                                0      0   100%
+website/settings/base.py                                                          26      0   100%
+website/settings/test.py                                                           1      0   100%
+website/urls.py                                                                    7      0   100%
+--------------------------------------------------------------------------------------------------
+TOTAL                                                                            375     30    92%
 ```
 
 ---
