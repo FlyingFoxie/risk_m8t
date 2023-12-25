@@ -10,3 +10,8 @@ drf-spectacular==0.26.5  # https://github.com/tfranzel/drf-spectacular
 # AWS
 # ------------------------------------------------------------------------------
 boto3==1.33.13 # https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+
+
+# Charting
+# ------------------------------------------------------------------------------
+plotly==5.18.0 # https://plotly.com/python/getting-started/

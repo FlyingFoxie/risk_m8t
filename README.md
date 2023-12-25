@@ -1,6 +1,6 @@
-<h1 align="center">KAMI Airlines</h1>
+<h1 align="center">risk m8t</h1>
 <p align="center">
-    <em>Django framework, airplane fuel consumption analysis</em>
+    <em>Django framework, risk management portal</em>
 </p>
 
 ---
